@@ -1,0 +1,7 @@
+{
+	"connections": [
+		"name": "postgresql",
+		"adapter": "postgres",
+		"host": "localhost",
+	]
+}

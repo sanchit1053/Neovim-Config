@@ -1,6 +1,8 @@
 local status_ok, codeRunner = pcall(require, 'code_runner')
 if not status_ok then
-	print("Code Runner not found")
+	if vim.bo.filetype == "cpp" then
+		print("Code Runner not found")
+	end
 	return
 end
 

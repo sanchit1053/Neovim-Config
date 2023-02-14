@@ -108,6 +108,9 @@ return packer.startup(function(use)
 		requires = { "nvim-lua/plenary.nvim" },
 	} ]]
 
+	-- TERMINAL
+	use "akinsho/toggleterm.nvim"
+
 	-- TELESCOPE
 	use {
 		"nvim-telescope/telescope.nvim",

@@ -32,6 +32,7 @@ require "user.text"
 require "user.indent_scope"
 require "user.cokeline"
 require "user.vimtex"
+require "user.toggleterm"
 
 require("fidget").setup()
 require("leap").add_default_mappings()

@@ -2,6 +2,7 @@
 
 local opt = vim.opt
 
+
 opt.backup = false
 opt.clipboard = ""
 opt.cmdheight = 1

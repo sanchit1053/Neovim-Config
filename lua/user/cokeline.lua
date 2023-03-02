@@ -1,6 +1,7 @@
 local status_ok, cokeline = pcall(require, 'cokeline')
 if not status_ok then
 	print("cokeline not found")
+	return
 end
 
 local get_hex = require('cokeline/utils').get_hex
@@ -156,6 +157,7 @@ cokeline.setup({
 		end,
 		bg = get_hex('ColorColumn', 'bg'),
 	},
+
 
 	sidebar = {
 		filetype = 'NvimTree',

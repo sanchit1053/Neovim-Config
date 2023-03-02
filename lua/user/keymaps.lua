@@ -1,5 +1,4 @@
 local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
 
 local keymap = vim.api.nvim_set_keymap
 
@@ -39,8 +38,8 @@ map("n", "<C-Left>", ":vertical resize -2<cr>")
 map("n", "<C-Right>", ":vertical resize +2<cr>")
 
 -- Navigating buffers
-map("n", "<S-l>", ":bnext<cr>")
-map("n", "<S-h>", ":bprevious<cr>")
+map("n", "<leader>]", ":bnext<cr>")
+map("n", "<leader>[", ":bprevious<cr>")
 
 
 -- Remove Arrows
@@ -64,10 +63,8 @@ map("n", "<A-q>", ":CompetiTestRun<cr>")
 map("n", "<A-a>", ":CompetiTestAdd<cr>")
 map("n", "<A-d>", ":CompetiTestDelele<cr>")
 map("n", "<A-e>", ":CompetiTestEdit<cr>")
-map("n", "<A-r>", ":CompetiTestReceive<cr>")
+map("n", "<A-r>", ":CompetiTestReceive testcases<cr>")
 
--- template Setting
-map("n", "<leader>w", ":r library/template.cpp<cr>kdd36j15li<cr><esc>ko")
 
 -- INSERT MODE
 
@@ -87,16 +84,15 @@ map("i", "<C-h>", "<Left>")
 map("i", "<C-l>", "<Right>")
 -- VISUAL
 
-map("v", ">", ">gv")
-map("v", "<", "<gv")
+map("v", "<A-l>", ">gv")
+map("v", "<A-h>", "<gv")
 
 map("v", "<A-j>", ":m '>+1<cr>gv=gv")
 map("v", "<A-k>", ":m '<-2<cr>gv=gv")
 map("v", "p", "_dP")
 
--- copy
-map("v", "<C-c>", "\"+y")
 
 -- Telescope
 map("n", "<leader>f", "<cmd>Telescope find_files<cr>")
 map("n", "<c-t>", "<cmd>Telescope live_grep<cr>")
+map("n", "<c-b>", "<cmd>Telescope buffers<cr>")

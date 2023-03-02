@@ -1,5 +1,6 @@
 local colorscheme = "catppuccin"
 
+
 local color_status_ok, color = pcall(require, colorscheme)
 if not color_status_ok then
 	print("colorscheme not found")

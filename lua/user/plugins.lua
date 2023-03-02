@@ -50,22 +50,38 @@ return packer.startup(function(use)
 				-- fallback = 'unnamedplus',
 				-- force_init_unnamed = true,
 			}
-		end
+		end,
 	}
 
 	-- TEXT plugins
-	use "rmagatti/alternate-toggler"
+	use {
+		"rmagatti/alternate-toggler",
+		config = function()
+			require("user.text")
+		end
+	}
 	use "m4xshen/autoclose.nvim"
 	use "mg979/vim-visual-multi"
 	use "gcmt/wildfire.vim"
 	use "tpope/vim-surround"
-	use "ggandor/leap.nvim"
+	use {
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").add_default_mappings()
+		end,
+	}
 
 	-- ColorSchemes
 	-- use "folke/tokyonight.nvim"
 	-- use "ellisonleao/gruvbox.nvim"
 	-- use "shaunsingh/nord.nvim"
-	use { "catppuccin/nvim", as = "catppuccin" }
+	use {
+		"catppuccin/nvim",
+		as = "catppuccin",
+		config = function()
+			require "user.colorschemes"
+		end
+	}
 
 	-- MARKDOWN
 	use({
@@ -80,10 +96,29 @@ return packer.startup(function(use)
 	}
 
 	-- Latex
-	use "lervag/vimtex"
+	use {
+		"lervag/vimtex",
+		disable = true,
+	}
+
+	-- documentation
+	use {
+		"danymat/neogen",
+		config = function()
+			require('neogen').setup {}
+		end,
+		requires = "nvim-treesitter/nvim-treesitter",
+		-- Uncomment next line if you want to follow only stable versions
+		-- tag = "*"
+	}
 
 	-- COMPLETIONS
-	use "hrsh7th/nvim-cmp"
+	use {
+		"hrsh7th/nvim-cmp",
+		config = function()
+			require("user.cmp")
+		end
+	}
 	use "hrsh7th/cmp-buffer"
 	use "hrsh7th/cmp-path"
 	use "hrsh7th/cmp-cmdline"
@@ -97,8 +132,19 @@ return packer.startup(function(use)
 
 	-- LSP
 	use "neovim/nvim-lspconfig"
-	use "williamboman/mason.nvim"
-	use "williamboman/mason-lspconfig.nvim"
+	use {
+		"williamboman/mason.nvim",
+		-- cmd = {
+		-- 	"Mason",
+		-- 	"MasonInstall",
+		-- 	"MasonUninstall",
+		-- 	"MasonUninstallAll",
+		-- 	"MasonLog",
+		-- },
+	}
+	use {
+		"williamboman/mason-lspconfig.nvim",
+	}
 	--[[ use {
 		"jose-elias-alvarez/null-ls.nvim",
 		config = function()
@@ -107,14 +153,17 @@ return packer.startup(function(use)
 		-- branch = '0.7-compat',
 		requires = { "nvim-lua/plenary.nvim" },
 	} ]]
-
 	-- TERMINAL
-	use "akinsho/toggleterm.nvim"
+	use {
+		"akinsho/toggleterm.nvim",
+		config = function()
+			require("user.toggleterm")
+		end
+	}
 
 	-- TELESCOPE
 	use {
 		"nvim-telescope/telescope.nvim",
-		tag = '0.1.0',
 		requires = { { 'nvim-lua/plenary.nvim' } },
 		cmd = { 'Telescope' }
 	}
@@ -122,13 +171,19 @@ return packer.startup(function(use)
 	-- TREESITTER
 	use {
 		"nvim-treesitter/nvim-treesitter",
-		run = ':TSUpdate'
+		run = ':TSUpdate',
+		config = function()
+			require "user.treesitter"
+		end
 	}
 
 	-- STATUS LINE
 	use {
 		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+		config = function()
+			require("user.lualine");
+		end
 	}
 
 	-- WhichKey
@@ -174,13 +229,24 @@ return packer.startup(function(use)
 		requires = {
 			'nvim-tree/nvim-web-devicons',
 		},
+		cmd = {
+			"NvimTreeToggle"
+		},
+		config = function()
+			require("user.nvimtree")
+		end
 	}
 
 
 	-- CokeLine TABS
+	use "kyazdani42/nvim-web-devicons"
 	use {
 		"noib3/nvim-cokeline",
 		requires = "kyazdani42/nvim-web-devicons",
+		after = "catppuccin",
+		config = function()
+			require("user.cokeline")
+		end
 	}
 
 
@@ -189,6 +255,9 @@ return packer.startup(function(use)
 		"CRAG666/code_runner.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		ft = { "cpp" },
+		config = function()
+			require "user.code_runner"
+		end
 	}
 
 	-- mini animate and line on scope
@@ -199,12 +268,20 @@ return packer.startup(function(use)
 	-- 	end
 	-- }
 
-	use "echasnovski/mini.indentscope"
+	use {
+		"echasnovski/mini.indentscope",
+		config = function()
+			require("user.indent_scope")
+		end
+	}
 
 	-- TESTCASE MANAGER
 	use {
 		"xeluxee/competitest.nvim",
 		requires = "MunifTanjim/nui.nvim",
+		config = function()
+			require "user.competitest"
+		end
 	}
 
 	-- Templates
@@ -214,7 +291,13 @@ return packer.startup(function(use)
 	--
 
 	-- Styles
-	use "j-hui/fidget.nvim"
+	use {
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup()
+		end,
+	}
+
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end

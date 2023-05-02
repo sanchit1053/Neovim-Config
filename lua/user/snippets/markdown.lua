@@ -29,24 +29,22 @@ end
 return {
 
 	s({
-		trig = "mk",
-		dscr = "Inline Math",
-		snippetType = "autosnippet",
-	},
+			trig = "mk",
+			dscr = "Inline Math",
+			snippetType = "autosnippet",
+		},
 		{
 			t("$"),
 			i(1),
 			t("$"),
-			f(checkspace, { 2 }, { user_args = {} }),
-			i(2),
 		}
 	),
 
 	s({
-		trig = 'box',
-		dscr = 'Box',
-		snippetType = "autosnippet",
-	},
+			trig = 'box',
+			dscr = 'Box',
+			snippetType = "autosnippet",
+		},
 		{
 			f(createBox, { 1 }, { user_args = { "top" } }),
 			t({ "", "|" }),

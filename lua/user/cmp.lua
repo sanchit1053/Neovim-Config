@@ -8,10 +8,15 @@ if not snip_status_ok then
 	return
 end
 
+
 require("luasnip/loaders/from_vscode").lazy_load({ include = { "cpp" } })
 require("luasnip/loaders/from_lua").load({ paths = "~/.config/nvim/lua/user/snippets" })
+
+
 luasnip.config.setup({
 	update_events = 'TextChanged,TextChangedI',
+	region_check_events = "CursorHold,InsertLeave,InsertEnter, CursorMovedI",
+	delete_check_events = "TextChanged,InsertEnter",
 	enable_autosnippets = true,
 })
 
@@ -79,7 +84,7 @@ cmp.setup {
 				luasnip.expand()
 			elseif cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
+			elseif luasnip.expand_or_locally_jumpable() then
 				luasnip.expand_or_jump()
 			elseif check_backspace() then
 				fallback()
@@ -131,6 +136,10 @@ cmp.setup {
 		select = false,
 	},
 	window = {
+		completion = {
+			border = 'rounded',
+			scrollbar = '║',
+		},
 		documentation = cmp.config.window.bordered(),
 	},
 	experimental = {

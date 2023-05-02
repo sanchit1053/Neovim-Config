@@ -98,7 +98,11 @@ return packer.startup(function(use)
 	-- Latex
 	use {
 		"lervag/vimtex",
-		disable = true,
+		ft = { 'tex' },
+		config = function()
+			require('user.vimtex')
+		end,
+
 	}
 
 	-- documentation
@@ -296,6 +300,10 @@ return packer.startup(function(use)
 		config = function()
 			require("fidget").setup()
 		end,
+	}
+
+	use {
+		'stevearc/dressing.nvim'
 	}
 
 	if PACKER_BOOTSTRAP then

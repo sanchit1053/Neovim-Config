@@ -1,5 +1,3 @@
 local g = vim.g
 local opt = vim.opt
-g.tex_flavor = 'latex'
-
-g.tex_conceal = 'abdmg'
+g.vimtex_view_method = 'zathura'

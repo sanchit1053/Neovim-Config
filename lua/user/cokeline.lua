@@ -23,26 +23,22 @@ local components = {
 		bg = get_hex('Normal', 'bg'),
 		truncation = { priority = 1 },
 	},
-
 	space = {
 		text = ' ',
 		truncation = { priority = 1 },
 	},
-
 	left_half_circle = {
 		text = '',
 		fg = get_hex('ColorColumn', 'bg'),
 		bg = get_hex('Normal', 'bg'),
 		truncation = { priority = 1 },
 	},
-
 	right_half_circle = {
 		text = '',
 		fg = get_hex('ColorColumn', 'bg'),
 		bg = get_hex('Normal', 'bg'),
 		truncation = { priority = 1 },
 	},
-
 	devicon = {
 		text = function(buffer)
 			return buffer.devicon.icon
@@ -52,7 +48,6 @@ local components = {
 		end,
 		truncation = { priority = 1 },
 	},
-
 	index = {
 		text = function(buffer)
 			return buffer.index .. ': '
@@ -64,7 +59,6 @@ local components = {
 		end,
 		truncation = { priority = 1 },
 	},
-
 	unique_prefix = {
 		text = function(buffer)
 			return buffer.unique_prefix
@@ -76,7 +70,6 @@ local components = {
 			direction = 'right',
 		},
 	},
-
 	filename = {
 		text = function(buffer)
 			return buffer.filename
@@ -137,18 +130,15 @@ local right_padding = {
 
 cokeline.setup({
 	show_if_buffers_are_at_least = 1,
-
 	buffers = {
 		-- filter_valid = function(buffer) return buffer.type ~= 'terminal' end,
 		-- filter_visible = function(buffer) return buffer.type ~= 'terminal' end,
 		focus_on_delete = 'next',
 		new_buffers_position = 'next',
 	},
-
 	rendering = {
 		max_buffer_width = min_buffer_width,
 	},
-
 	default_hl = {
 		fg = function(buffer)
 			return buffer.is_focused
@@ -157,8 +147,6 @@ cokeline.setup({
 		end,
 		bg = get_hex('ColorColumn', 'bg'),
 	},
-
-
 	sidebar = {
 		filetype = 'NvimTree',
 		components = {
@@ -170,7 +158,6 @@ cokeline.setup({
 			},
 		}
 	},
-
 	components = {
 		components.separator,
 		components.left_half_circle,

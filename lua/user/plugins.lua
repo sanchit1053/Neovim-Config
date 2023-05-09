@@ -94,7 +94,6 @@ local plugins = {
 	{
 		"hrsh7th/nvim-cmp",
 		config = function()
-			print("HELLO")
 			require("user.cmp")
 		end,
 		ft = { "cpp" },
@@ -199,7 +198,6 @@ local plugins = {
 	},
 
 
-	{ "p00f/nvim-ts-rainbow" },
 	{ "nvim-treesitter/playground" },
 
 	-- COMMENTS

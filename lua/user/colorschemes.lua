@@ -1,6 +1,5 @@
 local colorscheme = "catppuccin"
 
-
 local color_status_ok, color = pcall(require, colorscheme)
 if not color_status_ok then
 	print("colorscheme not found")
@@ -9,7 +8,8 @@ end
 
 color.setup({
 	flavour = "mocha", -- latte, frappe, macchiato, mocha
-	background = { -- :h background
+	background = {
+		-- :h background
 		light = "latte",
 		dark = "mocha",
 	},
@@ -49,8 +49,9 @@ color.setup({
 	},
 })
 
-local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+local status_ok, errorMsg = pcall(vim.cmd.colorscheme, colorscheme)
 if not status_ok then
 	vim.notify("colorscheme " .. colorscheme .. " not found")
+	error(errorMsg)
 	return
 end

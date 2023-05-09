@@ -12,3 +12,7 @@ api.nvim_create_autocmd("TextYankPost", {
 api.nvim_create_autocmd("BufReadPost", {
 	command = [[if line ("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]]
 })
+
+api.nvim_create_autocmd("TextChanged", {
+	command = "silent! write"
+})

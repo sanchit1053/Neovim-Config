@@ -10,6 +10,13 @@ local function map(mode, lhs, rhs, newopts)
 	keymap(mode, lhs, rhs, options)
 end
 
+
+local function setKeymaps(keymaps)
+	for i, v in ipairs(keymaps) do
+		map(v[1], v[2], v[3])
+	end
+end
+
 map("", "<Space>", "<Nop>")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -22,77 +29,82 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- window navigation
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
+local generalKeymaps = {
 
--- File Explorer
-map("n", "<leader>e", ":NvimTreeToggle<cr>")
+	-- window navigation
+	{ "n", "<C-h>",      "<C-w>h" },
+	{ "n", "<C-j>",      "<C-w>j" },
+	{ "n", "<C-k>",      "<C-w>k" },
+	{ "n", "<C-l>",      "<C-w>l" },
 
--- Resize in split
-map("n", "<C-Up>", ":resize +2<cr>")
-map("n", "<C-Down>", ":resize -2<cr>")
-map("n", "<C-Left>", ":vertical resize -2<cr>")
-map("n", "<C-Right>", ":vertical resize +2<cr>")
+	-- File Explorer
+	{ "n", "<leader>e",  ":NvimTreeToggle<cr>" },
 
--- Navigating buffers
-map("n", "<leader>]", ":bnext<cr>")
-map("n", "<leader>[", ":bprevious<cr>")
+	-- Resize in split
+	{ "n", "<C-Up>",     ":resize +2<cr>" },
+	{ "n", "<C-Down>",   ":resize -2<cr>" },
+	{ "n", "<C-Left>",   ":vertical resize, -2<cr>" },
+	{ "n", "<C-Right>",  ":vertical resize +2<cr>" },
 
+	-- Navigating buffers
+	{ "n", "<leader>]",  ":bnext<cr>" },
+	{ "n", "<leader>[",  ":bprevious<cr>" },
 
--- Remove Arrows
-map("n", "<Up>", "<NOP>")
-map("n", "<Down>", "<NOP>")
-map("n", "<Left>", "<NOP>")
-map("n", "<Right>", "<NOP>")
-
--- Save and quit
-map("n", "<leader>q", ":q<cr>")
-map("n", "<leader>Q", ":q!<cr>")
-map("n", "<leader>s", ":w<cr>")
+	-- Save and quit
+	{ "n", "<leader>q",  ":q<cr>" },
+	{ "n", "<leader>Q",  ":q!<cr>" },
+	{ "n", "<leader>s",  ":w<cr>" },
 
 
--- Code Runner
-map("n", "<leader>r", ":RunCode<cr>")
-map("n", "<leader>rc", ":RunClose<cr>")
+	-- Code Runner
+	{ "n", "<leader>r",  ":RunCode<cr>" },
+	{ "n", "<leader>rc", ":RunClose<cr>" },
 
--- TestCaseManager
-map("n", "<A-q>", ":CompetiTestRun<cr>")
-map("n", "<A-a>", ":CompetiTestAdd<cr>")
-map("n", "<A-d>", ":CompetiTestDelele<cr>")
-map("n", "<A-e>", ":CompetiTestEdit<cr>")
-map("n", "<A-r>", ":CompetiTestReceive testcases<cr>")
-
-
--- INSERT MODE
-
-map("i", "jk", "<ESC>")
-map("i", "kj", "<ESC>")
-
-map("i", "<Up>", "<NOP>")
-map("i", "<Down>", "<NOP>")
-map("i", "<Left>", "<NOP>")
-map("i", "<Right>", "<NOP>")
+	-- TestCaseManager
+	{ "n", "<A-q>",      ":CompetiTestRun<cr>" },
+	{ "n", "<A-a>",      ":CompetiTestAdd<cr>" },
+	{ "n", "<A-d>",      ":CompetiTestDelele<cr>" },
+	{ "n", "<A-e>",      ":CompetiTestEdit<cr>" },
+	{ "n", "<A-r>",      ":CompetiTestReceive testcases<cr>" },
 
 
+	-- Disable Arrow Keys
+	{ "n", "<Up>",       "<NOP>" },
+	{ "n", "<Down>",     "<NOP>" },
+	{ "n", "<Left>",     "<NOP>" },
+	{ "n", "<Right>",    "<NOP>" },
+	-- INSERT MODE
 
-map("i", "<C-j>", "<Down>")
-map("i", "<C-k>", "<Up>")
-map("i", "<C-h>", "<Left>")
-map("i", "<C-l>", "<Right>")
--- VISUAL
+	{ "i", "jk",         "<ESC>" },
+	{ "i", "kj",         "<ESC>" },
 
-map("v", "<A-l>", ">gv")
-map("v", "<A-h>", "<gv")
-
-map("v", "<A-j>", ":m '>+1<cr>gv=gv")
-map("v", "<A-k>", ":m '<-2<cr>gv=gv")
-map("v", "p", "_dP")
+	{ "i", "<Up>",       "<NOP>" },
+	{ "i", "<Down>",     "<NOP>" },
+	{ "i", "<Left>",     "<NOP>" },
+	{ "i", "<Right>",    "<NOP>" },
 
 
--- Telescope
-map("n", "<leader>f", "<cmd>Telescope find_files<cr>")
-map("n", "<c-t>", "<cmd>Telescope live_grep<cr>")
-map("n", "<c-b>", "<cmd>Telescope buffers<cr>")
+
+	{ "i", "<C-j>",      "<Down>" },
+	{ "i", "<C-k>",      "<Up>" },
+	{ "i", "<C-h>",      "<Left>" },
+	{ "i", "<C-l>",      "<Right>" },
+	-- VISUAL
+
+	{ "v", "<A-l>",      ">gv" },
+	{ "v", "<A-h>",      "<gv" },
+
+	{ "v", "<A-j>",      ":m '>+1<cr>gv=gv" },
+	{ "v", "<A-k>",      ":m '<-2<cr>gv=gv" },
+	{ "v", "p",          "_dP" },
+
+
+	-- Telescope
+	{ "n", "<leader>f",  "<cmd>Telescope find_files<cr>" },
+	{ "n", "<c-t>",      "<cmd>Telescope live_grep<cr>" },
+	{ "n", "<c-b>",      "<cmd>Telescope buffers<cr>" },
+}
+
+
+
+setKeymaps(generalKeymaps)

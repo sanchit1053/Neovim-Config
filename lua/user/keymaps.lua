@@ -12,8 +12,14 @@ end
 
 
 local function setKeymaps(keymaps)
-	for i, v in ipairs(keymaps) do
+	for _, v in ipairs(keymaps) do
 		map(v[1], v[2], v[3])
+	end
+end
+
+function NVIMCONFIG.setBufrKeymaps(bufnr, keymaps, options)
+	for _, v in ipairs(keymaps) do
+		vim.api.nvim_buf_set_keymap(bufnr, v[1], v[2], v[3], options)
 	end
 end
 
@@ -103,7 +109,29 @@ local generalKeymaps = {
 	{ "n", "<leader>f",  "<cmd>Telescope find_files<cr>" },
 	{ "n", "<c-t>",      "<cmd>Telescope live_grep<cr>" },
 	{ "n", "<c-b>",      "<cmd>Telescope buffers<cr>" },
+
+	-- Toggler
+	{ "n", "<leader>ta", ":ToggleAlternate<cr>" },
 }
+
+NVIMCONFIG.lspKeyMaps = {
+
+	{ "n", "gD",         "<cmd>lua vim.lsp.buf.declaration()<CR>" },
+	{ "n", "gd",         "<cmd>lua vim.lsp.buf.definition()<CR>" },
+	{ "n", "<leader>k",  "<cmd>lua vim.lsp.buf.hover()<CR>" },
+	{ "n", "gi",         "<cmd>lua vim.lsp.buf.implementation()<CR>" },
+	{ "n", "<C-k>",      "<cmd>lua vim.lsp.buf.signature_help()<CR>" },
+	{ "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>" },
+	{ "n", "gr",         "<cmd>lua vim.lsp.buf.references()<CR>" },
+	{ "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>" },
+	{ "n", "<leader>f",  "<cmd>lua vim.diagnostic.open_float()<CR>" },
+	{ "n", "[d",         '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>' },
+	{ "n", "gl",         '<cmd>lua vim.diagnostic.open_float()<CR>' },
+	{ "n", "]d",         '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>' },
+	{ "n", "<leader>d",  "<cmd>lua vim.diagnostic.setloclist()<CR>" },
+}
+
+
 
 
 

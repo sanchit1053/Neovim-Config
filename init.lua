@@ -11,6 +11,8 @@ vim.g.clipboard = {
 	cache_enabled = 0
 }
 
+NVIMCONFIG = {}
+
 require "user.options"
 require "user.keymaps"
 require "user.autocommands"

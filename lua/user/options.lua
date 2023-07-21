@@ -5,7 +5,7 @@ local opt = vim.opt
 
 opt.backup = false
 opt.clipboard = ""
-opt.cmdheight = 1
+opt.cmdheight = 0
 opt.completeopt = { "menuone", "noselect" }
 opt.conceallevel = 0
 opt.fileencoding = "utf-8"

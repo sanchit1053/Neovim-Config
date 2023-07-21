@@ -91,10 +91,10 @@ local generalKeymaps = {
 
 
 
-	{ "i", "<C-j>",      "<Down>" },
-	{ "i", "<C-k>",      "<Up>" },
-	{ "i", "<C-h>",      "<Left>" },
-	{ "i", "<C-l>",      "<Right>" },
+	-- { "i", "<C-j>",      "<Down>" },
+	-- { "i", "<C-k>",      "<Up>" },
+	-- { "i", "<C-h>",      "<Left>" },
+	-- { "i", "<C-l>",      "<Right>" },
 	-- VISUAL
 
 	{ "v", "<A-l>",      ">gv" },
@@ -124,7 +124,7 @@ NVIMCONFIG.lspKeyMaps = {
 	{ "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>" },
 	{ "n", "gr",         "<cmd>lua vim.lsp.buf.references()<CR>" },
 	{ "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>" },
-	{ "n", "<leader>f",  "<cmd>lua vim.diagnostic.open_float()<CR>" },
+	{ "n", "<leader>o",  "<cmd>lua vim.diagnostic.open_float()<CR>" },
 	{ "n", "[d",         '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>' },
 	{ "n", "gl",         '<cmd>lua vim.diagnostic.open_float()<CR>' },
 	{ "n", "]d",         '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>' },

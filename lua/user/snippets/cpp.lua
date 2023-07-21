@@ -1,11 +1,16 @@
 snippets = {
 	s({
-		trig = "(%S+)fol",
-		desc = "minimal for loop with long long",
-		regTrig = true,
-	},
+			trig = "(%S+)fol",
+			desc = "minimal for loop with long long",
+			regTrig = true,
+		},
 		{
-			f(function(args, snip) return "for ( long long " .. snip.captures[1] .. " = 0;" .. snip.captures[1] .. " < " end, {}),
+			f(
+				function(args, snip)
+					return "for ( long long " ..
+						snip.captures[1] .. " = 0;" .. snip.captures[1] .. " < "
+				end,
+				{}),
 			i(1, "n"),
 			f(function(args, snip) return "; " .. snip.captures[1] .. "++)" end, {}),
 			t({ "{", "\t", }),
@@ -30,6 +35,7 @@ snippets = {
 				"typedef vector<int> vi;",
 				"typedef vector<vector<int>> vvi;",
 				"typedef vector<vector<ll>> vvl;",
+				"#define int long long",
 				"ll MOD     = 998244353;",
 				"ll MOD2    = 1000000007; // 10^9 + 7;",
 				"double eps = 1e-12;",
@@ -60,7 +66,7 @@ snippets = {
 			i(0),
 			t({ "",
 				"}",
-				"int main() {",
+				"signed main() {",
 				"fast_cin();",
 				"/* #ifndef ONLINE_JUDGE */",
 				"/*    freopen(\"input.txt\", \"r\", stdin); */",
@@ -78,9 +84,9 @@ snippets = {
 	),
 
 	s({
-		trig = 'gcd',
-		desc = "The GCD function",
-	},
+			trig = 'gcd',
+			desc = "The GCD function",
+		},
 		{
 			t({
 
@@ -96,28 +102,21 @@ snippets = {
 		}
 	),
 
-	s({
-		trig = '(%S+)cin',
-		desc = "Read in an int",
-		regTrig = true,
-	},
-		{
-			f(function(args, snip)
-				return "long long " .. snip.captures[1] .. ";"
-			end),
-			t({ "", "" }),
-			f(function(args, snip)
-				return "cin >> " .. snip.captures[1] .. ";"
-			end),
-			t({ "", "" }),
-		}
-	),
+	s("cins", {
+		t("long long "),
+		i(1, "n"),
+		t({ ";", "cin >> " }),
+		-- lambda nodes accept an l._1,2,3,4,5, which in turn accept any string transformations.
+		-- This list will be applied in order to the first node given in the second argument.
+		l(l._1:gsub(",", " >> "), 1),
+		t({ ";", "" }),
+	}),
 
 	s({
-		trig = '(%S+)vec',
-		desc = "Define and Read in an vector<long long>",
-		regTrig = true,
-	},
+			trig = '(%S+)vec',
+			desc = "Define and Read in an vector<long long>",
+			regTrig = true,
+		},
 		{
 			f(function(args, snip)
 				return "vector<long long> " .. snip.captures[1] .. "("
@@ -130,7 +129,7 @@ snippets = {
 			f(function(args, snip)
 				return "cin >> " .. snip.captures[1] .. "["
 			end),
-			t("i];");
+			t("i];"),
 			t({ "", "}", "" }),
 		}
 	),

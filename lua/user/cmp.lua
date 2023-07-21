@@ -79,7 +79,7 @@ cmp.setup {
 			i = cmp.mapping.abort(),
 			c = cmp.mapping.close(),
 		},
-		["<Tab>"] = cmp.mapping(function(fallback)
+		["<tab>"] = cmp.mapping(function(fallback)
 			if luasnip.expandable() then
 				luasnip.expand()
 			elseif cmp.visible() then

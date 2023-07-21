@@ -63,8 +63,8 @@ local plugins = {
 	{
 		"iamcco/markdown-preview.nvim",
 		ft = { "markdown" },
-		run = function() vim.fn["mkdp#util#install"]() end,
-		dependencies = { "iamcco/mathjax-support-for-mkdp" }
+		build = function() vim.fn["mkdp#util#install"]() end,
+		dependencies = { "iamcco/mathjax-support-for-mkdp" },
 	},
 	{
 		'dkarter/bullets.vim',
@@ -86,7 +86,7 @@ local plugins = {
 		config = function()
 			require('neogen').setup {}
 		end,
-		requires = "nvim-treesitter/nvim-treesitter",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 		version = "*"
 	},
 
@@ -96,7 +96,6 @@ local plugins = {
 		config = function()
 			require("user.cmp")
 		end,
-		ft = { "cpp" },
 		dependencies = {
 			"cmp-nvim-lsp",
 			"cmp_luasnip",
@@ -171,12 +170,14 @@ local plugins = {
 			"TSInstallFromGrammar",
 		},
 		event = "User FileOpened",
+		lazy = "false",
+		version = nil,
 	},
 
 	-- STATUS LINE
 	{
 		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+		dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
 		config = function()
 			require("user.lualine");
 		end
@@ -193,7 +194,7 @@ local plugins = {
 	-- StartUP screen
 	{
 		"startup-nvim/startup.nvim",
-		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 		config = function()
 			require "startup".setup()
 		end
@@ -201,7 +202,6 @@ local plugins = {
 
 
 	{ "nvim-treesitter/playground" },
-
 	-- COMMENTS
 	{
 		"numToStr/Comment.nvim",
@@ -264,13 +264,13 @@ local plugins = {
 	{ 'stevearc/dressing.nvim' },
 	{
 		"folke/noice.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("user.noice")
 		end,
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
-			"nvim-treesitter/nvim-treesitter",
 		},
 	},
 

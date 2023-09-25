@@ -6,7 +6,7 @@ end
 
 
 configs.setup {
-	ensure_installed = { "cpp", "lua", "python", "vim"},
+	ensure_installed = { "cpp", "lua", "python", "vim" },
 	sync_install = false,
 	ignore_install = { "" },
 	highlight = {
@@ -14,7 +14,17 @@ configs.setup {
 		disable = { "" },
 		additional_vim_regex_highlighting = true,
 	},
-	indent = {enable = true, disable = { "" } },
+	indent = { enable = true, disable = { "" } },
+
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "<CR>", -- set to `false` to disable one of the mappings
+			node_incremental = "<CR>",
+			scope_incremental = "<Tab>",
+			node_decremental = "<S-Tab>",
+		},
+	},
 
 	rainbow = {
 		enable = true,
@@ -26,4 +36,3 @@ configs.setup {
 		enable = true,
 	},
 }
-

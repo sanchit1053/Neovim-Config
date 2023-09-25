@@ -35,7 +35,7 @@ testCaseManager.setup {
 		},
 	},
 	runner_ui = {
-		interface = "popup",
+		interface = "split",
 		selector_show_nu = false,
 		selector_show_rnu = false,
 		show_nu = true,
@@ -50,7 +50,7 @@ testCaseManager.setup {
 			view_stdout = { "o", "O" },
 			view_stderr = { "e", "E" },
 			toggle_diff = { "d", "D" },
-			close = { "q", "Q" , "<leader>q"},
+			close = { "q", "Q", "<leader>q" },
 		},
 		viewer = {
 			width = 0.5,
@@ -72,7 +72,7 @@ testCaseManager.setup {
 	split_ui = {
 		position = "right",
 		relative_to_editor = true,
-		total_width = 0.3,
+		total_width = 0.4,
 		vertical_layout = {
 			{ 1, "tc" },
 			{ 1, { { 1, "so" }, { 1, "eo" } } },
@@ -90,8 +90,8 @@ testCaseManager.setup {
 	save_all_files = false,
 	compile_directory = ".",
 	compile_command = {
-		c = { exec = "gcc", args = { "-Wall", "$(FNAME)", "-o", "$(FNOEXT)" } },
-		cpp = { exec = "g++", args = { "-Wall", "$(FNAME)", "-o", "$(FNOEXT)" } },
+		c = { exec = "gcc", args = { "-Wall", "$(FNAME)", "-o", "$(FNOEXT)", "-D", "HOME_COMPUTER_SANCHIT" } },
+		cpp = { exec = "g++", args = { "-Wall", "$(FNAME)", "-o", "$(FNOEXT)", "-D", "HOME_COMPUTER_SANCHIT" } },
 		rust = { exec = "rustc", args = { "$(FNAME)" } },
 		java = { exec = "javac", args = { "$(FNAME)" } },
 	},

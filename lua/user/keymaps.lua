@@ -67,11 +67,11 @@ local generalKeymaps = {
 	{ "n", "<leader>rc", ":RunClose<cr>" },
 
 	-- TestCaseManager
-	{ "n", "<A-q>",      ":CompetiTestRun<cr>" },
-	{ "n", "<A-a>",      ":CompetiTestAdd<cr>" },
-	{ "n", "<A-d>",      ":CompetiTestDelele<cr>" },
-	{ "n", "<A-e>",      ":CompetiTestEdit<cr>" },
-	{ "n", "<A-r>",      ":CompetiTestReceive testcases<cr>" },
+	{ "n", "<A-q>",      ":CompetiTest run<cr>" },
+	{ "n", "<A-a>",      ":CompetiTest add_testcase<cr>" },
+	{ "n", "<A-d>",      ":CompetiTest delele<cr>" },
+	{ "n", "<A-e>",      ":CompetiTest edit_testcase<cr>" },
+	{ "n", "<A-r>",      ":CompetiTest receive testcases<cr>" },
 
 
 	-- Disable Arrow Keys
@@ -130,9 +130,5 @@ NVIMCONFIG.lspKeyMaps = {
 	{ "n", "]d",         '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>' },
 	{ "n", "<leader>d",  "<cmd>lua vim.diagnostic.setloclist()<CR>" },
 }
-
-
-
-
 
 setKeymaps(generalKeymaps)

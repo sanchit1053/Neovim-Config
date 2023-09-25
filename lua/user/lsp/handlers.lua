@@ -4,9 +4,9 @@ local M = {}
 M.setup = function()
 	local signs = {
 		{ name = "DiagnosticSignError", text = "" },
-		{ name = "DiagnosticSignWarn",  text = "" },
-		{ name = "DiagnosticSignHint",  text = "" },
-		{ name = "DiagnosticSignInfo",  text = "" },
+		{ name = "DiagnosticSignWarn", text = "" },
+		{ name = "DiagnosticSignHint", text = "" },
+		{ name = "DiagnosticSignInfo", text = "" },
 	}
 
 	for _, sign in ipairs(signs) do
@@ -59,7 +59,7 @@ local function lsp_highlight_document(client)
 	end
 end
 
-local function lsp_keymaps(bufnr)
+local function lsp_keymaps(bufnr, client)
 	local opts = { noremap = true, silent = true }
 	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
@@ -79,21 +79,22 @@ local function lsp_keymaps(bufnr)
 	NVIMCONFIG.setBufrKeymaps(bufnr, NVIMCONFIG.lspKeyMaps, opts)
 
 	-- format on save
-	vim.api.nvim_create_autocmd('BufWritePre', {
-		group = vim.api.nvim_create_augroup('LspFormatting', { clear = true }),
-		buffer = bufnr,
-		callback = function()
-			print("format")
-			vim.lsp.buf.format()
-		end
-	})
+	if client.supports_method("textDocument/formatting") then
+		vim.api.nvim_create_autocmd('BufWritePre', {
+			group = vim.api.nvim_create_augroup('LspFormatting', { clear = true }),
+			buffer = bufnr,
+			callback = function()
+				vim.lsp.buf.format()
+			end
+		})
+	end
 end
 
 M.on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
 		client.server_capabilities.documentFormattingProvider = false
 	end
-	lsp_keymaps(bufnr)
+	lsp_keymaps(bufnr, client)
 	lsp_highlight_document(client)
 end
 

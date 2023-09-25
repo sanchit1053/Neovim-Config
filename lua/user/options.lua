@@ -45,3 +45,4 @@ opt.timeoutlen = 500
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
+

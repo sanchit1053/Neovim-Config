@@ -8,7 +8,7 @@ local function server_name()
 	local active_servers = vim.lsp.buf_get_clients()
 	local count = 0
 	local firstClient = ""
-	for i, client in pairs(active_servers) do
+	for _, client in pairs(active_servers) do
 		count = count + 1
 		if count == 1 then
 			firstClient = client.name

@@ -51,6 +51,8 @@ local plugins = {
 	{ "folke/tokyonight.nvim",    enabled = false },
 	{ "ellisonleao/gruvbox.nvim", enabled = false },
 	{ "shaunsingh/nord.nvim",     enabled = false },
+	{ "ramojus/mellifluous.nvim", enabled = false },
+	{ "rebelot/kanagawa.nvim",    enabled = true },
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -64,7 +66,14 @@ local plugins = {
 		"iamcco/markdown-preview.nvim",
 		ft = { "markdown" },
 		build = function() vim.fn["mkdp#util#install"]() end,
-		dependencies = { "iamcco/mathjax-support-for-mkdp" },
+		config = function()
+			vim.cmd [[
+				function OpenMarkdownPreview (url)
+					execute "silent ! /mnt/c/Program\\ Files/Google/Chrome/Application/chrome.exe " . a:url
+				endfunction
+				let g:mkdp_browserfunc = 'OpenMarkdownPreview'
+			]]
+		end,
 	},
 	{
 		'dkarter/bullets.vim',
@@ -217,7 +226,7 @@ local plugins = {
 		end
 	},
 
-	-- neo-Tree
+	-- nvim-tree
 	{
 		"nvim-tree/nvim-tree.lua",
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -259,6 +268,7 @@ local plugins = {
 		config = function()
 			require("fidget").setup()
 		end,
+		tag = "legacy",
 	},
 	{ "lukas-reineke/indent-blankline.nvim" },
 	{ 'stevearc/dressing.nvim' },

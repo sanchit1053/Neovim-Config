@@ -7,6 +7,7 @@ local servers = {
 	"emmet_ls",
 	"eslint",
 	"marksman",
+	"csharp_ls"
 }
 
 local settings = {

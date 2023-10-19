@@ -24,6 +24,18 @@ local function server_name()
 	return ret
 end
 
+local function compitest_status()
+	print(vim.b.competitest_title);
+	return vim.b.competitest_title or "CompetiTest"
+end
+
+local compitest = {
+	sections = {
+		lualine_a = { compitest_status }
+	},
+	filetypes = { "CompetiTest" }
+}
+
 lualine.setup {
 	options = {
 		icons_enabled = true,
@@ -45,7 +57,15 @@ lualine.setup {
 	},
 	sections = {
 		lualine_a = { 'mode' },
-		lualine_b = { 'branch', 'diff', 'diagnostics' },
+		lualine_b = { 'branch', 'diff', {
+			'diagnostics',
+			symbols = {
+				error = " ",
+				warn  = " ",
+				hint  = " ",
+				info  = " ",
+			}
+		} },
 		lualine_c = { 'filename' },
 		lualine_x = { 'encoding', 'fileformat', 'filetype', server_name },
 		lualine_y = { 'progress' },
@@ -62,5 +82,5 @@ lualine.setup {
 	tabline = {},
 	winbar = {},
 	inactive_winbar = {},
-	extensions = {}
+	extensions = { compitest }
 }

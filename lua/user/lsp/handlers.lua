@@ -33,7 +33,6 @@ M.setup = function()
 	}
 	vim.diagnostic.config(config)
 
-
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 		border = "rounded",
 	})
@@ -105,7 +104,5 @@ if not status_ok then
 	return
 end
 
-
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-
 return M

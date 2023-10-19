@@ -1,22 +1,18 @@
 local servers = {
 	"lua_ls",
 	"pyright",
-	"jsonls",
 	"clangd",
-	"sqlls",
-	"emmet_ls",
-	"eslint",
-	"marksman",
-	"csharp_ls"
 }
+
+SERVERS = servers
 
 local settings = {
 	ui = {
-		border = "none",
+		border = "rounded",
 		icons = {
-			package_installed = "◍",
-			package_pending = "◍",
-			package_uninstalled = "◍",
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
 		},
 	},
 	log_level = vim.log.levels.INFO,
@@ -48,6 +44,9 @@ for _, server in pairs(servers) do
 	local requre_ok, conf_opts = pcall(require, "user.lsp.settings." .. server)
 	if requre_ok then
 		opts = vim.tbl_deep_extend("force", conf_opts, opts)
+	end
+	if opts.filetypes then
+		print(opts.filetypes[1])
 	end
 
 	if server == "clangd" then

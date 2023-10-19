@@ -63,8 +63,8 @@ local generalKeymaps = {
 
 
 	-- Code Runner
-	{ "n", "<leader>r",  ":RunCode<cr>" },
-	{ "n", "<leader>rc", ":RunClose<cr>" },
+	{ "n", "<leader>rc", ":RunCode<cr>" },
+	{ "n", "<leader>rq", ":RunClose<cr>" },
 
 	-- TestCaseManager
 	{ "n", "<A-q>",      ":CompetiTest run<cr>" },

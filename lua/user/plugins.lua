@@ -160,6 +160,13 @@ local plugins = {
 		"nvim-telescope/telescope.nvim",
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		cmd = { "Telescope" },
+		config = function()
+			require("user.telescope")
+		end
+	},
+	{
+		"gbrlsnchs/telescope-lsp-handlers.nvim",
+		dependencies = { 'nvim-telescope/telescope.nvim' }
 	},
 
 	-- TREESITTER

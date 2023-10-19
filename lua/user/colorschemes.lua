@@ -51,8 +51,9 @@ color.setup({
 		light = "lotus"
 	},
 })
+
 -- color.setup({
--- 	flavour = "mocha", -- latte, frappe, macchiato, mocha
+-- flavour = "mocha", -- latte, frappe, macchiato, mocha
 -- 	background = {
 -- 		-- :h background
 -- 		light = "latte",

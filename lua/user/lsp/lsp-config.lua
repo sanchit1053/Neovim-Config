@@ -26,5 +26,6 @@ for _, server in pairs(servers) do
 	if server == "clangd" then
 		opts.capabilities.offsetEncoding = 'utf-8'
 	end
+
 	lspconfig[server].setup(opts)
 end

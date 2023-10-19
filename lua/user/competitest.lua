@@ -35,7 +35,7 @@ testCaseManager.setup {
 		},
 	},
 	runner_ui = {
-		interface = "split",
+		interface = "popup",
 		selector_show_nu = false,
 		selector_show_rnu = false,
 		show_nu = true,

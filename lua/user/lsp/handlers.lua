@@ -1,6 +1,5 @@
 local M = {}
 
--- TODO: backfill this to template
 M.setup = function()
 	local signs = {
 		{ name = "DiagnosticSignError", text = "" },
@@ -45,7 +44,7 @@ end
 local function lsp_highlight_document(client)
 	-- Set autocommands conditional on server_capabilities
 	if client.server_capabilities.documentHighlightProvider then
-		vim.api.nvim_exec(
+		vim.api.nvim_exec2(
 			[[
       augroup lsp_document_highlight
         autocmd! * <buffer>
@@ -53,40 +52,29 @@ local function lsp_highlight_document(client)
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
     ]],
-			false
+			{ output = false }
 		)
 	end
 end
 
 local function lsp_keymaps(bufnr, client)
 	local opts = { noremap = true, silent = true }
-	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>k", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-	-- -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	-- -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-	-- -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-	-- -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting_sync()' ]]
-	--
 	NVIMCONFIG.setBufrKeymaps(bufnr, NVIMCONFIG.lspKeyMaps, opts)
 
-	-- format on save
 	if client.supports_method("textDocument/formatting") then
-		vim.api.nvim_create_autocmd('BufWritePre', {
-			group = vim.api.nvim_create_augroup('LspFormatting', { clear = true }),
-			buffer = bufnr,
-			callback = function()
-				vim.lsp.buf.format()
-			end
-		})
+		vim.keymap.set('n', "<leader>bf", function() vim.lsp.buf.format() end, { desc = "[b]uffer [f]ormat" })
 	end
+
+	-- format on save
+	-- if client.supports_method("textDocument/formatting") then
+	-- 	vim.api.nvim_create_autocmd('BufWritePre', {
+	-- 		group = vim.api.nvim_create_augroup('LspFormatting', { clear = true }),
+	-- 		buffer = bufnr,
+	-- 		callback = function()
+	-- 			vim.lsp.buf.format()
+	-- 		end
+	-- 	})
+	-- end
 end
 
 M.on_attach = function(client, bufnr)

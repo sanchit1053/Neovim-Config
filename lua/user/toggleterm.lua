@@ -6,9 +6,11 @@ end
 toggleterm.setup({
 	size = function(term)
 		if term.direction == "float" then
-			return 20
+			return 40
 		elseif term.direction == "horizontal" then
 			return 15
+		elseif term.direction == "vertical" then
+			return 40
 		end
 	end,
 	open_mapping = [[<M-`>]],
@@ -19,7 +21,7 @@ toggleterm.setup({
 	start_in_insert = true,
 	insert_mappings = true,
 	persist_size = true,
-	direction = "horizontal",
+	direction = "vertical",
 	close_on_exit = true,
 	shell = vim.o.shell,
 	float_opts = {
@@ -45,7 +47,7 @@ end
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 local Terminal = require("toggleterm.terminal").Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction='float'  })
 
 function _LAZYGIT_TOGGLE()
 	lazygit:toggle()

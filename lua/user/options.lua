@@ -1,5 +1,3 @@
--- :help options
-
 local opt = vim.opt
 
 
@@ -25,6 +23,7 @@ opt.updatetime = 300
 opt.expandtab = false
 opt.shiftwidth = 4
 opt.tabstop = 4
+opt.listchars = { tab = "  " }
 opt.cursorline = true
 opt.number = true
 opt.relativenumber = true
@@ -45,4 +44,3 @@ opt.timeoutlen = 500
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
-

@@ -23,22 +23,20 @@ local plugins = {
 		"EtiamNullam/deferred-clipboard.nvim",
 		config = function()
 			require('deferred-clipboard').setup {
-				-- fallback = 'unnamedplus',
-				-- force_init_unnamed = true,
 			}
 		end,
 	},
 
 	-- TEXT plugins
-
 	{
 		"rmagatti/alternate-toggler",
+		cmd = "ToggleAlternate",
 		config = function()
 			require("user.text")
 		end
 	},
-	{ "m4xshen/autoclose.nvim" },
-	{ "mg979/vim-visual-multi" },
+	{ "m4xshen/autoclose.nvim", event = "InsertEnter" },
+	{ "mg979/vim-visual-multi", enabled = false },
 	{ "tpope/vim-surround" },
 	{
 		"ggandor/leap.nvim",
@@ -56,6 +54,7 @@ local plugins = {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
+		lazy = false,
 		config = function()
 			require "user.colorschemes"
 		end
@@ -92,6 +91,7 @@ local plugins = {
 	-- documentation
 	{
 		"danymat/neogen",
+		cmd = "Neogen",
 		config = function()
 			require('neogen').setup {}
 		end,
@@ -102,6 +102,7 @@ local plugins = {
 	-- COMPLETIONS
 	{
 		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
 		config = function()
 			require("user.cmp")
 		end,
@@ -126,7 +127,7 @@ local plugins = {
 	{ "saadparwaiz1/cmp_luasnip",            lazy = true },
 	{
 		"L3MON4D3/LuaSnip",
-		event = { "InsertEnter" },
+		event = "InsertEnter",
 		dependencies = { "friendly-snippets" }
 	},
 	{ "rafamadriz/friendly-snippets", lazy = true },
@@ -135,13 +136,13 @@ local plugins = {
 	{ "neovim/nvim-lspconfig" },
 	{
 		"williamboman/mason.nvim",
-		-- cmd = {
-		-- 	"Mason",
-		-- 	"MasonInstall",
-		-- 	"MasonUninstall",
-		-- 	"MasonUninstallAll",
-		-- 	"MasonLog",
-		-- },
+		cmd = {
+			"Mason",
+			"MasonInstall",
+			"MasonUninstall",
+			"MasonUninstallAll",
+			"MasonLog",
+		},
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -150,6 +151,7 @@ local plugins = {
 	-- TERMINAL
 	{
 		"akinsho/toggleterm.nvim",
+		cmd = { "ToggleTerm" },
 		config = function()
 			require("user.toggleterm")
 		end
@@ -172,22 +174,21 @@ local plugins = {
 	-- TREESITTER
 	{
 		"nvim-treesitter/nvim-treesitter",
-		-- run =  ':TSUpdate',
+		-- cmd = {
+		-- 	"TSInstall",
+		-- 	"TSUninstall",
+		-- 	"TSUpdate",
+		-- 	"TSUpdateSync",
+		-- 	"TSInstallInfo",
+		-- 	"TSInstallSync",
+		-- 	"TSInstallFromGrammar",
+		-- },
+		build = ":TSUpdate",
+		-- event = "User FileOpened",
+		lazy = false,
 		config = function()
 			require "user.treesitter"
 		end,
-		cmd = {
-			"TSInstall",
-			"TSUninstall",
-			"TSUpdate",
-			"TSUpdateSync",
-			"TSInstallInfo",
-			"TSInstallSync",
-			"TSInstallFromGrammar",
-		},
-		event = "User FileOpened",
-		lazy = "false",
-		version = nil,
 	},
 
 	-- STATUS LINE
@@ -202,6 +203,7 @@ local plugins = {
 	-- WhichKey
 	{
 		"folke/which-key.nvim",
+		opt = true,
 		config = function()
 			require("user.whichkey")
 		end,
@@ -217,7 +219,6 @@ local plugins = {
 	},
 
 
-	{ "nvim-treesitter/playground" },
 	-- COMMENTS
 	{
 		"numToStr/Comment.nvim",
@@ -225,6 +226,7 @@ local plugins = {
 			require("Comment").setup()
 		end
 	},
+
 	-- GIT
 	{
 		"lewis6991/gitsigns.nvim",
@@ -263,6 +265,7 @@ local plugins = {
 	{
 		"xeluxee/competitest.nvim",
 		dependencies = { "MunifTanjim/nui.nvim" },
+		ft           = { "cpp" },
 		config       = function()
 			require "user.competitest"
 		end
@@ -277,10 +280,10 @@ local plugins = {
 		end,
 		tag = "legacy",
 	},
-	{ "lukas-reineke/indent-blankline.nvim" },
-	{ 'stevearc/dressing.nvim' },
+	{ 'stevearc/dressing.nvim',        lazy = true },
 	{
 		"folke/noice.nvim",
+
 		event = "VeryLazy",
 		config = function()
 			require("user.noice")
@@ -293,16 +296,13 @@ local plugins = {
 
 	-- tmux
 	{ 'christoomey/vim-tmux-navigator' },
+
+	-- rust
+	{ 'simrat39/rust-tools.nvim' }
 }
 
-require('lazy').setup(plugins)
-
-
-
-
--- -- vim.cmd [[
--- -- 	augroup packer_user_config
--- -- 		autocmd!
--- -- 		autocmd BufWritePost plugins.lua source <afile> | PackerSync
--- -- 	augroup end
--- -- ]]
+require('lazy').setup(plugins, {
+	ui = {
+		border = "rounded",
+	},
+})

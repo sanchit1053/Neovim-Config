@@ -5,7 +5,7 @@ if not status_ok then
 end
 
 local function server_name()
-	local active_servers = vim.lsp.buf_get_clients()
+	local active_servers = vim.lsp.get_clients()
 	local count = 0
 	local firstClient = ""
 	for _, client in pairs(active_servers) do
@@ -25,7 +25,6 @@ local function server_name()
 end
 
 local function compitest_status()
-	print(vim.b.competitest_title);
 	return vim.b.competitest_title or "CompetiTest"
 end
 
@@ -34,6 +33,15 @@ local compitest = {
 		lualine_a = { compitest_status }
 	},
 	filetypes = { "CompetiTest" }
+}
+
+local competitest_line = {
+	filetypes = { 'CompetiTest' },
+	inactive_sections = {
+		lualine_b = { function()
+			return vim.b.competitest_title or 'CompetiTest'
+		end },
+	},
 }
 
 lualine.setup {
@@ -46,7 +54,7 @@ lualine.setup {
 			statusline = {},
 			winbar = {},
 		},
-		ignore_focus = {},
+		ignore_focus = { 'CompetiTest' },
 		always_divide_middle = true,
 		globalstatus = false,
 		refresh = {
@@ -82,5 +90,5 @@ lualine.setup {
 	tabline = {},
 	winbar = {},
 	inactive_winbar = {},
-	extensions = { compitest }
+	extensions = { competitest_line }
 }

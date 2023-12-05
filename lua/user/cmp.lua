@@ -20,38 +20,44 @@ luasnip.config.setup({
 	enable_autosnippets = true,
 })
 
-local check_backspace = function()
-	local col = vim.fn.col "." - 1
-	return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+local has_words_before = function()
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
 end
 
+-- local check_backspace = function()
+-- 	local col = vim.fn.col "." - 1
+-- 	return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+-- end
+
 --   פּ ﯟ   some other good icons
+
 local kind_icons = {
-	Text = "",
+	Text = "󰊄",
 	Method = "m",
-	Function = "",
+	Function = "ƒ",
 	Constructor = "",
 	Field = "",
-	Variable = "",
-	Class = "",
+	Variable = "",
+	Class = "",
 	Interface = "",
 	Module = "",
 	Property = "",
 	Unit = "",
-	Value = "",
+	Value = "",
 	Enum = "",
-	Keyword = "",
+	Keyword = "",
 	Snippet = "",
-	Color = "",
-	File = "",
+	Color = "",
+	File = "",
 	Reference = "",
-	Folder = "",
+	Folder = "󰉋",
 	EnumMember = "",
-	Constant = "",
+	Constant = "",
 	Struct = "",
 	Event = "",
-	Operator = "",
-	TypeParameter = "",
+	Operator = "",
+	TypeParameter = "",
 }
 
 cmp.setup {
@@ -80,13 +86,13 @@ cmp.setup {
 			c = cmp.mapping.close(),
 		},
 		["<tab>"] = cmp.mapping(function(fallback)
-			if luasnip.expandable() then
-				luasnip.expand()
-			elseif cmp.visible() then
+			if cmp.visible() then
 				cmp.select_next_item()
+			elseif luasnip.expandable() then
+				luasnip.expand()
 			elseif luasnip.expand_or_locally_jumpable() then
 				luasnip.expand_or_jump()
-			elseif check_backspace() then
+			elseif has_words_before() then
 				fallback()
 			else
 				fallback()
@@ -112,8 +118,8 @@ cmp.setup {
 		fields = { "kind", "abbr", "menu" },
 		format = function(entry, vim_item)
 			-- Kind icons
-			-- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-			vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+			vim_item.kind = string.format("%s ", kind_icons[vim_item.kind])
+			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
 			vim_item.menu = ({
 				nvim_lsp = "[LSP]",
 				nvim_lua = "[LUA]",

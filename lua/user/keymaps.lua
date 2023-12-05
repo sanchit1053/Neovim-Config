@@ -5,7 +5,7 @@ local keymap = vim.api.nvim_set_keymap
 local function map(mode, lhs, rhs, newopts)
 	local options = opts
 	if newopts then
-		options = vim.tbl_expand("force", options, newopts)
+		options = vim.tbl_extend("force", options, newopts)
 	end
 	keymap(mode, lhs, rhs, options)
 end
@@ -13,7 +13,11 @@ end
 
 local function setKeymaps(keymaps)
 	for _, v in ipairs(keymaps) do
-		map(v[1], v[2], v[3])
+		if #v == 3 then
+			map(v[1], v[2], v[3])
+		else
+			map(v[1], v[2], v[3], v[4])
+		end
 	end
 end
 
@@ -44,7 +48,15 @@ local generalKeymaps = {
 	{ "n", "<C-l>",      "<C-w>l" },
 
 	-- File Explorer
-	{ "n", "<leader>e",  ":NvimTreeToggle<cr>" },
+	{ "n", "<leader>e",  ":NvimTreeToggle<cr>",               { desc = "fil[e] explorer" } },
+
+	-- Clear Highlight
+	{ "n", "<leader>c",  ":noh<cr>",                          { desc = "[c]lear highlights" } },
+
+	-- Find And Replace
+	{ "n", "<C-n>", "*``cgn"},
+	{ "n", "<C-m>", "*``cgN"},
+
 
 	-- Resize in split
 	{ "n", "<C-Up>",     ":resize +2<cr>" },
@@ -53,18 +65,18 @@ local generalKeymaps = {
 	{ "n", "<C-Right>",  ":vertical resize +2<cr>" },
 
 	-- Navigating buffers
-	{ "n", "<leader>]",  ":bnext<cr>" },
-	{ "n", "<leader>[",  ":bprevious<cr>" },
+	{ "n", "<leader>]",  ":bnext<cr>",                        { desc = "next buffer" } },
+	{ "n", "<leader>[",  ":bprevious<cr>",                    { desc = "previous buffer" } },
 
 	-- Save and quit
-	{ "n", "<leader>q",  ":q<cr>" },
-	{ "n", "<leader>Q",  ":q!<cr>" },
-	{ "n", "<leader>s",  ":w<cr>" },
+	{ "n", "<leader>q",  ":q<cr>",                            { desc = "[q]uit" } },
+	{ "n", "<leader>Q",  ":q!<cr>",                           { desc = "force [Q]uit" } },
+	{ "n", "<leader>s",  ":w<cr>",                            { desc = "[s]ave" } },
 
 
 	-- Code Runner
-	{ "n", "<leader>rc", ":RunCode<cr>" },
-	{ "n", "<leader>rq", ":RunClose<cr>" },
+	{ "n", "<leader>rc", ":RunCode<cr>",                      { desc = "[r]un [c]ode" } },
+	{ "n", "<leader>rq", ":RunClose<cr>",                     { desc = "[r]un [q]uit" } },
 
 	-- TestCaseManager
 	{ "n", "<A-q>",      ":CompetiTest run<cr>" },
@@ -79,6 +91,8 @@ local generalKeymaps = {
 	{ "n", "<Down>",     "<NOP>" },
 	{ "n", "<Left>",     "<NOP>" },
 	{ "n", "<Right>",    "<NOP>" },
+
+
 	-- INSERT MODE
 
 	{ "i", "jk",         "<ESC>" },
@@ -89,12 +103,6 @@ local generalKeymaps = {
 	{ "i", "<Left>",     "<NOP>" },
 	{ "i", "<Right>",    "<NOP>" },
 
-
-
-	-- { "i", "<C-j>",      "<Down>" },
-	-- { "i", "<C-k>",      "<Up>" },
-	-- { "i", "<C-h>",      "<Left>" },
-	-- { "i", "<C-l>",      "<Right>" },
 	-- VISUAL
 
 	{ "v", "<A-l>",      ">gv" },
@@ -102,13 +110,13 @@ local generalKeymaps = {
 
 	{ "v", "<A-j>",      ":m '>+1<cr>gv=gv" },
 	{ "v", "<A-k>",      ":m '<-2<cr>gv=gv" },
-	{ "v", "p",          "_dP" },
+	{ "v", "p",          "\"_dP" },
 
 
 	-- Telescope
-	{ "n", "<leader>f",  "<cmd>Telescope find_files<cr>" },
-	{ "n", "<c-t>",      "<cmd>Telescope live_grep<cr>" },
-	{ "n", "<c-b>",      "<cmd>Telescope buffers<cr>" },
+	{ "n", "<leader>tf",  "<cmd>Telescope find_files<cr>", {desc = "[t]elescope [f]iles"} },
+	{ "n", "<leader>tw",      "<cmd>Telescope live_grep<cr>", {desc = "[t]elescope [w]ords"}},
+	{ "n", "<leader>tb",      "<cmd>Telescope buffers<cr>", {desc = "[t]elescope [b]uffers"}},
 
 	-- Toggler
 	{ "n", "<leader>ta", ":ToggleAlternate<cr>" },

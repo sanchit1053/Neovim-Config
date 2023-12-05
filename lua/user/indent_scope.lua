@@ -5,5 +5,5 @@ if not status_ok then
 end
 
 indent_scope.setup({
-	symbol = '|'
+	symbol = '│'
 })

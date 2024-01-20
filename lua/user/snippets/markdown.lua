@@ -17,7 +17,7 @@ local function checkspace(args, parent, user_args)
 	end
 end
 
-local function createBox(args, parent, user_args)
+local function createBox(args, _, user_args)
 	local pos = user_args
 	if pos == 'top' then
 		return '┌' .. string.rep('-', string.len(args[1][1])) .. '┐'
@@ -40,18 +40,19 @@ return {
 		}
 	),
 
-	s({
-			trig = 'box',
-			dscr = 'Box',
-			snippetType = "autosnippet",
-		},
-		{
-			f(createBox, { 1 }, { user_args = { "top" } }),
-			t({ "", "|" }),
-			i(1),
-			t({ "|", "" }),
-			f(createBox, { 1 }, { user_args = { "bottom" } }),
-			t({ "", "" })
-
-		})
+	-- s({
+	-- 		trig = 'box',
+	-- 		dscr = 'Box',
+	-- 		snippetType = "autosnippet",
+	-- 		enabled = false,
+	-- 	},
+	-- 	{
+	-- 		f(createBox, { 1 }, { user_args = { "top" } }),
+	-- 		t({ "", "|" }),
+	-- 		i(1),
+	-- 		t({ "|", "" }),
+	-- 		f(createBox, { 1 }, { user_args = { "bottom" } }),
+	-- 		t({ "", "" })
+	--
+	-- 	})
 }

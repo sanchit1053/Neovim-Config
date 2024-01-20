@@ -2,6 +2,7 @@ local servers = {
 	"lua_ls",
 	"pyright",
 	"clangd",
+	"jdtls",
 }
 
 SERVERS = servers

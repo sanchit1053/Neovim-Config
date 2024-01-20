@@ -35,7 +35,6 @@ local plugins = {
 			require("user.text")
 		end
 	},
-	{ "m4xshen/autoclose.nvim", event = "InsertEnter" },
 	{ "mg979/vim-visual-multi", enabled = false },
 	{ "tpope/vim-surround" },
 	{
@@ -108,19 +107,15 @@ local plugins = {
 		end,
 		dependencies = {
 			"cmp-nvim-lsp",
-			"cmp_luasnip",
 			"cmp-buffer",
 			"cmp-path",
-			"cmp-cmdline",
-			"cmp-nvim-lua",
+			"cmp_luasnip",
 			"cmp-nvim-lsp-signature-help",
 		},
 	},
 	{ "hrsh7th/cmp-buffer",                  lazy = true },
 	{ "hrsh7th/cmp-path",                    lazy = true },
-	{ "hrsh7th/cmp-cmdline",                 lazy = true },
 	{ "hrsh7th/cmp-nvim-lsp",                lazy = true },
-	{ "hrsh7th/cmp-nvim-lua",                lazy = true },
 	{ "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true },
 
 	-- Snippets
@@ -128,9 +123,9 @@ local plugins = {
 	{
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
-		dependencies = { "friendly-snippets" }
+		dependencies = { "rafamadriz/friendly-snippets" }
 	},
-	{ "rafamadriz/friendly-snippets", lazy = true },
+	{ "rafamadriz/friendly-snippets"},
 
 	-- LSP
 	{ "neovim/nvim-lspconfig" },
@@ -254,11 +249,29 @@ local plugins = {
 		end
 	},
 
+	-- Mini
 	{
 		"echasnovski/mini.indentscope",
 		config = function()
 			require("user.indent_scope")
 		end
+	},
+	{
+		"echasnovski/mini.pairs",
+		event = "InsertEnter",
+		config = function ()
+			require("user.pairs")
+		end,
+		-- opts = {},
+		-- keys = {
+		-- 	{
+		-- 		"<leader>up",
+		-- 		function()
+		-- 			vim.g.minipairs_disable = not vim.g.minipairs_disable;
+		-- 		end,
+		-- 		desc = "Toggle auto [p]air"
+		-- 	}
+		-- }
 	},
 
 	-- TESTCASE MANAGER
@@ -298,7 +311,15 @@ local plugins = {
 	{ 'christoomey/vim-tmux-navigator' },
 
 	-- rust
-	{ 'simrat39/rust-tools.nvim' }
+	{ 'simrat39/rust-tools.nvim' },
+
+	-- vanity
+	{
+		'gen740/SmoothCursor.nvim',
+		config = function()
+			require('smoothcursor').setup()
+		end
+	}
 }
 
 require('lazy').setup(plugins, {

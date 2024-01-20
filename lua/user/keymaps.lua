@@ -1,6 +1,7 @@
+local NVIMCONFIG = NVIMCONFIG
 local opts = { noremap = true, silent = true }
 
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 local function map(mode, lhs, rhs, newopts)
 	local options = opts
@@ -11,7 +12,7 @@ local function map(mode, lhs, rhs, newopts)
 end
 
 
-local function setKeymaps(keymaps)
+function NVIMCONFIG.setKeyMaps(keymaps)
 	for _, v in ipairs(keymaps) do
 		if #v == 3 then
 			map(v[1], v[2], v[3])
@@ -54,8 +55,8 @@ local generalKeymaps = {
 	{ "n", "<leader>c",  ":noh<cr>",                          { desc = "[c]lear highlights" } },
 
 	-- Find And Replace
-	{ "n", "<C-n>", "*``cgn"},
-	{ "n", "<C-m>", "*``cgN"},
+	{ "n", "<C-n>",      "*``cgn" },
+	{ "n", "<C-m>",      "*``cgN" },
 
 
 	-- Resize in split
@@ -114,9 +115,9 @@ local generalKeymaps = {
 
 
 	-- Telescope
-	{ "n", "<leader>tf",  "<cmd>Telescope find_files<cr>", {desc = "[t]elescope [f]iles"} },
-	{ "n", "<leader>tw",      "<cmd>Telescope live_grep<cr>", {desc = "[t]elescope [w]ords"}},
-	{ "n", "<leader>tb",      "<cmd>Telescope buffers<cr>", {desc = "[t]elescope [b]uffers"}},
+	{ "n", "<leader>tf", "<cmd>Telescope find_files<cr>",     { desc = "[t]elescope [f]iles" } },
+	{ "n", "<leader>tw", "<cmd>Telescope live_grep<cr>",      { desc = "[t]elescope [w]ords" } },
+	{ "n", "<leader>tb", "<cmd>Telescope buffers<cr>",        { desc = "[t]elescope [b]uffers" } },
 
 	-- Toggler
 	{ "n", "<leader>ta", ":ToggleAlternate<cr>" },
@@ -139,4 +140,4 @@ NVIMCONFIG.lspKeyMaps = {
 	{ "n", "<leader>d",  "<cmd>lua vim.diagnostic.setloclist()<CR>" },
 }
 
-setKeymaps(generalKeymaps)
+NVIMCONFIG.setKeyMaps(generalKeymaps)

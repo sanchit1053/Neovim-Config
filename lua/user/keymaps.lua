@@ -68,6 +68,7 @@ local generalKeymaps = {
 	-- Navigating buffers
 	{ "n", "<leader>]",  ":bnext<cr>",                        { desc = "next buffer" } },
 	{ "n", "<leader>[",  ":bprevious<cr>",                    { desc = "previous buffer" } },
+	{ "n", "<leader>bd",  ":bdelete<cr>",                      { desc = "delete buffer" } },
 
 	-- Save and quit
 	{ "n", "<leader>q",  ":q<cr>",                            { desc = "[q]uit" } },
@@ -137,7 +138,7 @@ NVIMCONFIG.lspKeyMaps = {
 	{ "n", "[d",         '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>' },
 	{ "n", "gl",         '<cmd>lua vim.diagnostic.open_float()<CR>' },
 	{ "n", "]d",         '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>' },
-	{ "n", "<leader>d",  "<cmd>lua vim.diagnostic.setloclist()<CR>" },
+	{ "n", "<leader>D",  "<cmd>lua vim.diagnostic.setloclist()<CR>" },
 }
 
 NVIMCONFIG.setKeyMaps(generalKeymaps)

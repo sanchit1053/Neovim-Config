@@ -1,14 +1,8 @@
-local status_ok, whichkey = pcall(require, "which-key")
-if not status_ok then
-	print("whichkey not found")
-	return
-end
-local conf = {
-	window = {
-		border = "single", -- none, single, double, shadow
-		position = "bottom", -- bottom, top
-	},
-}
+-- local status_ok, whichkey = pcall(require, "which-key")
+-- if not status_ok then
+-- 	print("whichkey not found")
+-- 	return
+-- end
 
 -- local opts = {
 -- 	mode = "n", -- Normal mode
@@ -34,4 +28,10 @@ local conf = {
 -- }
 
 -- whichkey.register(mappings, opts)
-whichkey.setup(conf)
+-- whichkey.setup(conf)
+
+-- WhichKey
+return {
+	"folke/which-key.nvim",
+	opts = {},
+}

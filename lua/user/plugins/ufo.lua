@@ -1,0 +1,27 @@
+-- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+-- vim.o.foldcolumn = '1'
+-- vim.o.foldlevel = 99
+-- vim.o.foldlevelstart = 99
+-- vim.o.foldenable = true
+--
+-- local status_ok, ufo = pcall(require, "ufo")
+-- if not status_ok then
+-- 	print("ufo not found")
+-- 	return
+-- end
+--
+-- vim.keymap.set('n', 'zK', function()
+-- 	local winid = require('ufo').peekFoldedLinesUnderCursor()
+-- 	if not winid then
+-- 		vim.lsp.buf.hover();
+-- 	end
+-- end, { desc = "pee[K] fold" })
+--
+-- ufo.setup({
+-- 	provider_selector = function(bufnr, filetype, buftype)
+-- 		return { 'lsp', 'indent' }
+-- 	end
+-- })
+--
+
+return {}

@@ -25,6 +25,7 @@ snippets = {
 
 				using namespace std;
 
+				#define int long long
 				typedef long long ll;
 				typedef long double ld;
 				typedef pair<int, int> pi;
@@ -34,7 +35,6 @@ snippets = {
 				typedef vector<int> vi;
 				typedef vector<vector<int>> vvi;
 				typedef vector<vector<ll>> vvl;
-				#define int long long
 				ll MOD     = 998244353;
 				ll MOD2    = 1000000007; // 10^9 + 7;
 				double eps = 1e-12;
@@ -76,10 +76,6 @@ snippets = {
 				void debug_out() { cerr << endl; } template <typename Head, typename... Tail>void debug_out(Head H, Tail... T) {cerr << " " << to_string(H);debug_out(T...);}
 				// clang-format on
 
-				#define mp make_pair
-				#define pb push_back
-				#define f first
-				#define s second
 				#define INF 2e18
 				#define fast_cin()                                                             \
 					ios_base::sync_with_stdio(false);                                          \
@@ -95,10 +91,6 @@ snippets = {
 				}
 				signed main() {
 					fast_cin();
-					/* #ifndef ONLINE_JUDGE */
-					/*    freopen("input.txt", "r", stdin); */
-					/*    freopen("output.txt", "w", stdout); */
-					/* #endif */
 					ll t = 1;
 					cin >> t;
 					for (int it = 1; it <= t; it++) {

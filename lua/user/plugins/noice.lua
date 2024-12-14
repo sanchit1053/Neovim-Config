@@ -1,11 +1,11 @@
-local status_ok, noice = pcall(require, "noice")
+-- local status_ok, noice = pcall(require, "noice")
+--
+-- if not status_ok then
+-- 	print("Noice not found")
+-- 	return
+-- end
 
-if not status_ok then
-	print("Noice not found")
-	return
-end
-
-noice.setup({
+options = {
 	cmdline = {
 		enabled = true,   -- enables the Noice cmdline UI
 		view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
@@ -152,8 +152,8 @@ noice.setup({
 	},
 	markdown = {
 		hover = {
-			["|(%S-)|"] = vim.cmd.help,              -- vim help links
-			["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
+			["|(%S-)|"] = vim.cmd.help, -- vim help links
+			-- ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
 		},
 		highlights = {
 			["|%S-|"] = "@text.reference",
@@ -187,4 +187,19 @@ noice.setup({
 	routes = {},
 	status = {},
 	format = {},
-})
+}
+
+return
+{
+	"folke/noice.nvim",
+
+	event = "VeryLazy",
+	opts = options,
+	-- config = function()
+	-- 	require("user.noice")
+	-- end,
+	dependencies = {
+		"MunifTanjim/nui.nvim",
+		"rcarriga/nvim-notify",
+	},
+}

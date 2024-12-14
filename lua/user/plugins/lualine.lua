@@ -1,9 +1,3 @@
-local status_ok, lualine = pcall(require, "lualine")
-if not status_ok then
-	print("lualine not found")
-	return
-end
-
 local function server_name()
 	local active_servers = vim.lsp.get_clients()
 	local count = 0
@@ -44,7 +38,7 @@ local competitest_line = {
 	},
 }
 
-lualine.setup {
+local options = {
 	options = {
 		icons_enabled = true,
 		theme = 'auto',
@@ -75,7 +69,7 @@ lualine.setup {
 			}
 		} },
 		lualine_c = { 'filename' },
-		lualine_x = { 'encoding', 'fileformat', 'filetype', server_name },
+		lualine_x = { 'encoding', 'fileformat', 'filetype' --[[ , server_name  ]] },
 		lualine_y = { 'progress' },
 		lualine_z = { 'location' }
 	},
@@ -91,4 +85,11 @@ lualine.setup {
 	winbar = {},
 	inactive_winbar = {},
 	extensions = { competitest_line }
+}
+
+return
+{
+	'nvim-lualine/lualine.nvim',
+	dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+	opts = options,
 }

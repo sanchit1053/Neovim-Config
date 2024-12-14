@@ -1,9 +1,4 @@
-local status_ok, testCaseManager = pcall(require, "competitest")
-if not status_ok then
-	return
-end
-
-testCaseManager.setup {
+local options = {
 	local_config_file_name = ".competitest.lua",
 
 	floating_border = "rounded",
@@ -117,4 +112,12 @@ testCaseManager.setup {
 
 	companion_port = 27121,
 	receive_print_message = true,
+}
+
+return
+{
+	"xeluxee/competitest.nvim",
+	dependencies = { "MunifTanjim/nui.nvim" },
+	ft           = { "cpp" },
+	opts         = options,
 }
